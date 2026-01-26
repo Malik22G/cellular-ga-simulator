@@ -6,6 +6,7 @@ import { Controls } from "./controls"
 import { PopulationCanvas } from "./population-canvas"
 import { FitnessChart } from "./fitness-chart"
 import { StatsDisplay } from "./stats-display"
+import { BinaryIndividual, RealVectorIndividual } from "@/lib/cellular-ga"
 
 const CANVAS_WIDTH = 700
 const CANVAS_HEIGHT = 500
@@ -28,6 +29,7 @@ export function GASimulator() {
   const [showConnections, setShowConnections] = useState(false)
   const [speed, setSpeed] = useState(30)
   const [stats, setStats] = useState({ generation: 0, best: 0, avg: 0, diversity: 0 })
+  const [bestIndividual, setBestIndividual] = useState<BinaryIndividual | RealVectorIndividual | null>(null)
 
   const animationRef = useRef<number | null>(null)
   const lastFrameTimeRef = useRef(0)
@@ -53,6 +55,7 @@ export function GASimulator() {
       avg: gaStats.avg,
       diversity: gaStats.diversity,
     })
+    setBestIndividual(newGA.getBestIndividual())
   }, [])
 
   useEffect(() => {
@@ -82,6 +85,7 @@ export function GASimulator() {
         diversity: gaStats.diversity,
       })
       setGA({ ...gaRef.current } as CellularGA)
+      setBestIndividual(gaRef.current.getBestIndividual())
       lastFrameTimeRef.current = timestamp
     }
 
@@ -172,6 +176,7 @@ export function GASimulator() {
               bestFitness={stats.best}
               avgFitness={stats.avg}
               diversity={stats.diversity}
+              bestIndividual={bestIndividual}
             />
 
             <FitnessChart ga={ga} />

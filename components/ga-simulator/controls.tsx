@@ -79,10 +79,10 @@ export function Controls({
               <SelectValue />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="onemax">OneMax (Minimize 1s)</SelectItem>
+              <SelectItem value="onemax">OneMax</SelectItem>
               <SelectItem value="trap">Deceptive Trap</SelectItem>
               <SelectItem value="sphere">Sphere Function</SelectItem>
-              <SelectItem value="rastrigin">Rastrigin (Multimodal)</SelectItem>
+              <SelectItem value="rastrigin">Rastrigin</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -103,8 +103,8 @@ export function Controls({
             value={[config.popSize]}
             onValueChange={([v]) => onConfigChange("popSize", v)}
             min={100}
-            max={900}
-            step={100}
+            max={10000}
+            step={10}
           />
         </div>
 
@@ -116,9 +116,9 @@ export function Controls({
           <Slider
             value={[config.genomeLength]}
             onValueChange={([v]) => onConfigChange("genomeLength", v)}
-            min={10}
-            max={40}
-            step={5}
+            min={1}
+            max={100}
+            step={1}
           />
         </div>
 
