@@ -408,7 +408,9 @@ export class CellularGA {
 
 
       const parent1 = this.tournamentSelection(neighbors)
-      const parent2 = this.tournamentSelection(neighbors)
+
+      const idx = neighbors.filter(n => this.population[n] !== parent1)
+      const parent2 = this.tournamentSelection(idx)
 
       let child: Individual
       if (this.isBinary()) {
